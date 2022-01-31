@@ -1,0 +1,30 @@
+﻿@page "/adder"
+
+<PageTitle>Adder</PageTitle>
+
+<h1>Counter</h1>
+
+
+  <label for="fname">First Number:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Second Number:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  
+  Still working on<br>
+
+
+<button class="btn btn-primary" @onclick="ClickMe">Click me</button>
+<p role="status">Answer: @currentCount</p>
+
+
+
+
+@code {
+    private int currentCount = 0;
+
+    private void ClickMe()
+	{
+		Console.WriteLine("welp");
+	}
+	
+}

@@ -1,0 +1,72 @@
+@page "/breweries"
+@using System.Text.Json
+@using System.Text.Json.Serialization;
+@inject IHttpClientFactory ClientFactory
+
+<h1>Call web API from Breweries</h1>
+
+@if (getBranchesError)
+{
+    <p>Unable to get branches from GitHub. Please try again later.</p>
+}
+else
+{
+    <ul>
+		<table>
+			<tr>
+				<th><b>Names</b></th>
+				<th><b>Phone Number</b></th>
+			</tr>
+			@foreach (var branch in branches)
+			{
+				<tr>
+					<th>@branch.name</th>
+					<th>@branch.phone</th>
+					</tr>
+			}
+		</table>
+    </ul>
+}
+
+
+@code {
+    private IEnumerable<breweries> branches = Array.Empty<breweries>();
+    private bool getBranchesError;
+    private bool shouldRender;
+
+    protected override bool ShouldRender() => shouldRender;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get,
+            "https://api.openbrewerydb.org/breweries");
+        
+        request.Headers.Add("User-Agent", "HttpClientFactory-Sample");
+
+        var client = ClientFactory.CreateClient();
+
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            branches = await JsonSerializer.DeserializeAsync
+                <IEnumerable<breweries>>(responseStream);
+        }
+        else
+        {
+            getBranchesError = true;
+        }
+
+        shouldRender = true;
+    }
+
+    
+	public class breweries
+	{
+		public string name { get; set;} 
+		public string brewreytype { get; set; }
+		public string phone {get; set;}
+		
+	}
+}

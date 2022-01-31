@@ -1,0 +1,78 @@
+@page "/gallery"
+
+<PageTitle>MyGIMP2</PageTitle>
+<h1>Gallery</h1>
+<br>
+<br>
+<table style="width:70%">
+	<tr>
+    <th><img src="images/image1.jpg" /></th>
+    <th><img src="images/image2.jpg" /></th>
+    <th><img src="images/image3.jpg" /></th>
+  </tr>
+  <tr>
+    <td><button class="mybutton" @onclick="GetImage1">
+	ID 1
+</button></td>
+    <td><button class="mybutton" @onclick="GetImage2">
+	ID 2
+</button></td>
+    <td><button class="mybutton" @onclick="GetImage3">
+	ID 3
+</button></td>
+  </tr>
+  <tr>
+    <td><img src="images/image4.jpg" /></td>
+    <td><img src="images/image5.jpg" /></td>
+    <td><img src="images/image6.jpg" /></td>
+  </tr>
+  <tr>
+    <td><button class="mybutton" @onclick="GetImage4">
+	ID 4
+</button></td>
+    <td><button class="mybutton" @onclick="GetImage5">
+	ID 5
+</button></td>
+    <td><button class="mybutton" @onclick="GetImage6">
+	ID 6
+</button></td>
+  </tr>
+</table>
+
+
+
+<p><img src=@FullImage width =70% /></p>
+
+
+@code {
+
+    private string? FullImage;
+
+    private void GetImage1(MouseEventArgs e)
+    {
+        FullImage = "images/Gym2019.png";
+    }
+	private void GetImage2(MouseEventArgs e)
+    {
+        FullImage = "images/BeastWhatIShouldBeDoing.jpg";
+    }
+	private void GetImage3(MouseEventArgs e)
+    {
+        FullImage = "images/Scorched.jpg";
+    }
+	private void GetImage4(MouseEventArgs e)
+    {
+        FullImage = "images/Tilkus.jpg";
+    }
+	private void GetImage5(MouseEventArgs e)
+    {
+        FullImage = "images/CDB.jpg";
+    }
+	private void GetImage6(MouseEventArgs e)
+    {
+        FullImage = "images/Yen.png";
+    }
+   
+
+}
+
